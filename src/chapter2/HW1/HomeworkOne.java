@@ -13,9 +13,12 @@ import chapter2.OrderedArray.MyOrderedArray;
 
 public class HomeworkOne {
     public static void main(String[] args) {
+        final int SIZE = 100;
+
+        System.out.println("\n\nProblem 2\n\n");
+
         //// Problem 2.a ////
 
-        final int SIZE = 100;
         MyArray arr1 = new MyArray(SIZE);
         MyArray arr2 = new MyArray(SIZE * 10);
         MyArray arr3 = new MyArray(SIZE * 100);
@@ -61,7 +64,7 @@ public class HomeworkOne {
         System.out.println(arr3.search(SIZE * 100));
         long endTime_d2 = System.currentTimeMillis();
         System.out.println("Total execution time for search(): " + (endTime_d2 - startTime_d2)); 
-        // output: 0ms || 166959ns
+        // output: 1ms || 166959ns
 
         //// Problem 2.e ////
 
@@ -73,24 +76,108 @@ public class HomeworkOne {
         long endTime_e = System.currentTimeMillis();
         System.out.println("Total execution time for add(): " + (endTime_e - startTime_e));
         // output: 0ms || 1416ns
+
+        System.out.println("\n\nProblem 3\n\n");
+
+        //// Problem 3.a ////
+
+        MyOrderedArray oArr1 = new MyOrderedArray(SIZE);
+        MyOrderedArray oArr2 = new MyOrderedArray(SIZE * 10);
+        MyOrderedArray oArr3 = new MyOrderedArray(SIZE * 100);
+
+        //// Problem 3.b ////
+
+        for (int j = 0; j < SIZE * 100; j++) {
+            if (j < SIZE) {
+                oArr1.add((int) (Math.random() * SIZE));
+            } else if (j < SIZE * 10) {
+                oArr2.add((int) (Math.random() * (SIZE * 10)));
+            } else {
+                oArr3.add((int) (Math.random() * (SIZE * 100)));
+            }
+        }
+
+        //// Problem 3.c ////
+
+        // Removing randomly chosen numbers from the array
+        long startTime_xc = System.currentTimeMillis();
+        System.out.println(oArr1.removeKey(8));
+        System.out.println(oArr2.removeKey(739));
+        System.out.println(oArr3.removeKey(1879));
+        long endTime_xc = System.currentTimeMillis();
+        System.out.println("Total execution time for removeKey(): " + (endTime_xc - startTime_xc)); 
+        // output: 0ms || 101417ns (none found)
+        // output: 0ms || 254500ns (all found)
+
+        //// Problem 3.d ////
+
+        // Searching for randomly chosen numbers from the array using binary search
+        long startTime_xd = System.currentTimeMillis();
+        System.out.println(oArr1.search(8));
+        System.out.println(oArr2.search(739));
+        System.out.println(oArr3.search(1879));
+        long endTime_xd = System.currentTimeMillis();
+        System.out.println("Total execution time for binarySearch(): " + (endTime_xd - startTime_xd)); 
+        // output: 0ms || 61292ns (two found)
+
+        // Searching for non-existent numbers from the array using binary search
+        long startTime_xd2 = System.currentTimeMillis();
+        System.out.println(oArr1.search(SIZE));
+        System.out.println(oArr2.search(SIZE * 10));
+        System.out.println(oArr3.search(SIZE * 100));
+        long endTime_xd2 = System.currentTimeMillis();
+        System.out.println("Total execution time for binarySearch(): " + (endTime_xd2 - startTime_xd2)); 
+        // output: 1ms || 59417ns
+
+        //// Problem 3.e ////
+
+        // Inserting randomly chosen numbers
+        long startTime_xe = System.currentTimeMillis();
+        arr1.add(56);
+        arr2.add(965);
+        arr3.add(3420);
+        long endTime_xe = System.currentTimeMillis();
+        System.out.println("Total execution time for add(): " + (endTime_xe - startTime_xe));
+        // output: 0ms || 17125ns
+
+
     }
 }
-//// Problem 2.f ////
 
-// Output (each test is slightly different of course):
+// Sample Output (each test is slightly different of course):
 /*
-53
-364
-907
+Problem 2
+
+
+90
+778
+1600
 Total execution time for remove(): 0
 -1
 -1
-5785
+897
 Total execution time for search(): 0
 -1
 -1
 -1
-Total execution time for search(): 0
+Total execution time for search(): 1
+Total execution time for add(): 0
+
+
+Problem 3
+
+
+false
+true
+false
+Total execution time for removeKey(): 0
+-1
+655
+-1
+Total execution time for binarySearch(): 1
+-1
+-1
+-1
+Total execution time for binarySearch(): 0
 Total execution time for add(): 0
 */
-
