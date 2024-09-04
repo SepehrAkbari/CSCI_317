@@ -8,14 +8,53 @@
 
 package chapter2.HW1;
 
+import java.util.function.*;
+
 import chapter1.Array.MyArray;
 import chapter2.OrderedArray.MyOrderedArray;
 
+
 public class HomeworkOne {
+    public static void timeComplexity(int size, Runnable function) {
+        long startTimeMS = System.currentTimeMillis();
+        long startTimeNS = System.nanoTime();
+
+        function.run();
+
+        long endTimeNS = System.nanoTime();
+        long endTimeMS = System.currentTimeMillis();
+
+        System.out.println("Time taken (" + size + "): " + (endTimeMS - startTimeMS) + "ms");
+        System.out.println("Time taken (" + size + "): " + (endTimeNS - startTimeNS) + "ns");
+        System.out.print("\n");
+    }
+
+    public static void conditionalTimeComplexity(int size, BooleanSupplier condition, Runnable function) {
+        boolean n = false;
+        while (!n) {
+            if (condition.getAsBoolean()) {
+                long startTimeMS = System.currentTimeMillis();
+                long startTimeNS = System.nanoTime();
+        
+                function.run();  
+                
+                long endTimeNS = System.nanoTime();
+                long endTimeMS = System.currentTimeMillis();
+                
+                System.out.println("Time taken (" + size + "): " + (endTimeMS - startTimeMS) + "ms");
+                System.out.println("Time taken (" + size + "): " + (endTimeNS - startTimeNS) + "ns");
+                System.out.print("\n");
+                
+                n = true;
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         final int SIZE = 100;
 
-        System.out.println("\n\nProblem 2\n\n");
+        //// Problem 2 ////
+        System.out.println("\n\n-- Unordered Array --\n\n");
 
         //// Problem 2.a ////
 
@@ -37,47 +76,40 @@ public class HomeworkOne {
 
         //// Problem 2.c ////
 
-        // Removing numbers from the end of the array
-        long startTime_c = System.currentTimeMillis();
-        System.out.println(arr1.remove());
-        System.out.println(arr2.remove());
-        System.out.println(arr3.remove());
-        long endTime_c = System.currentTimeMillis();
-        System.out.println("Total execution time for remove(): " + (endTime_c - startTime_c)); 
-        // output: 0ms || 136165ns
+        System.out.println("Running time of remove(): \n");
+        timeComplexity(SIZE, () -> arr1.remove());
+        timeComplexity(SIZE * 10, () -> arr2.remove());
+        timeComplexity(SIZE * 100, () -> arr3.remove());
+
+        System.out.print("\n");
 
         //// Problem 2.d ////
         
-        // Searching randomly chosen numbers
-        long startTime_d = System.currentTimeMillis();
-        System.out.println(arr1.search(500));
-        System.out.println(arr2.search(2806));
-        System.out.println(arr3.search(34));
-        long endTime_d = System.currentTimeMillis();
-        System.out.println("Total execution time for search(): " + (endTime_d - startTime_d)); 
-        // output: 0ms || 57375ns (two found, one not found)
+        System.out.println("Running time of search(): \nSearching for a random number in the array\n");
+        timeComplexity(SIZE, () -> arr1.search((int) (Math.random() * SIZE)));
+        timeComplexity(SIZE * 10, () -> arr2.search((int) (Math.random() * (SIZE * 10))));
+        timeComplexity(SIZE * 100, () -> arr3.search((int) (Math.random() * (SIZE * 100))));
 
-        // Searching numbers that are NOT in the array
-        long startTime_d2 = System.currentTimeMillis();
-        System.out.println(arr1.search(SIZE));
-        System.out.println(arr2.search(SIZE * 10));
-        System.out.println(arr3.search(SIZE * 100));
-        long endTime_d2 = System.currentTimeMillis();
-        System.out.println("Total execution time for search(): " + (endTime_d2 - startTime_d2)); 
-        // output: 1ms || 166959ns
+        System.out.print("\n");
+
+        System.out.println("Running time of search(): \nSearching for a non-existing number in the array\n");
+        timeComplexity(SIZE, () -> arr1.search(SIZE));
+        timeComplexity(SIZE * 10, () -> arr2.search(SIZE * 10));
+        timeComplexity(SIZE * 100, () -> arr3.search(SIZE * 100));
+
+        System.out.print("\n");
 
         //// Problem 2.e ////
 
-        // Inserting randomly chosen numbers
-        long startTime_e = System.currentTimeMillis();
-        arr1.add(56);
-        arr2.add(965);
-        arr3.add(3420);
-        long endTime_e = System.currentTimeMillis();
-        System.out.println("Total execution time for add(): " + (endTime_e - startTime_e));
-        // output: 0ms || 1416ns
+        System.out.println("Running time of add(): \n");
+        timeComplexity(SIZE, () -> arr1.add((int) (Math.random() * SIZE)));
+        timeComplexity(SIZE * 10, () -> arr2.add((int) (Math.random() * (SIZE * 10))));
+        timeComplexity(SIZE * 100, () -> arr3.add((int) (Math.random() * (SIZE * 100))));
 
-        System.out.println("\n\nProblem 3\n\n");
+        System.out.print("\n");
+
+        //// Problem 3 ////
+        System.out.println("\n\n-- Ordered Array --\n\n");
 
         //// Problem 3.a ////
 
@@ -99,85 +131,43 @@ public class HomeworkOne {
 
         //// Problem 3.c ////
 
-        // Removing randomly chosen numbers from the array
-        long startTime_xc = System.currentTimeMillis();
-        System.out.println(oArr1.removeKey(8));
-        System.out.println(oArr2.removeKey(739));
-        System.out.println(oArr3.removeKey(1879));
-        long endTime_xc = System.currentTimeMillis();
-        System.out.println("Total execution time for removeKey(): " + (endTime_xc - startTime_xc)); 
-        // output: 0ms || 101417ns (none found)
-        // output: 0ms || 254500ns (all found)
+        System.out.println("Running time of remove(): \n");
+        conditionalTimeComplexity(SIZE, 
+            () -> oArr1.removeKey((int) (Math.random() * SIZE)),  
+            () -> oArr1.removeKey((int) (Math.random() * SIZE)) 
+        );
+        conditionalTimeComplexity(SIZE * 10, 
+            () -> oArr2.removeKey((int) (Math.random() * SIZE * 10)),  
+            () -> oArr2.removeKey((int) (Math.random() * (SIZE * 10)))
+        );
+        conditionalTimeComplexity(SIZE * 100, 
+            () -> oArr3.removeKey((int) (Math.random() * SIZE * 100)),  
+            () -> oArr3.removeKey((int) (Math.random() * (SIZE * 100)))
+        );
+
+        System.out.print("\n");
 
         //// Problem 3.d ////
 
-        // Searching for randomly chosen numbers from the array using binary search
-        long startTime_xd = System.currentTimeMillis();
-        System.out.println(oArr1.search(8));
-        System.out.println(oArr2.search(739));
-        System.out.println(oArr3.search(1879));
-        long endTime_xd = System.currentTimeMillis();
-        System.out.println("Total execution time for binarySearch(): " + (endTime_xd - startTime_xd)); 
-        // output: 0ms || 61292ns (two found)
+        System.out.println("Running time of search(): \nSearching for a random number in the array\n");
+        timeComplexity(SIZE, () -> oArr1.search((int) (Math.random() * SIZE)));
+        timeComplexity(SIZE * 10, () -> oArr2.search((int) (Math.random() * (SIZE * 10))));
+        timeComplexity(SIZE * 100, () -> oArr3.search((int) (Math.random() * (SIZE * 100))));
 
-        // Searching for non-existent numbers from the array using binary search
-        long startTime_xd2 = System.currentTimeMillis();
-        System.out.println(oArr1.search(SIZE));
-        System.out.println(oArr2.search(SIZE * 10));
-        System.out.println(oArr3.search(SIZE * 100));
-        long endTime_xd2 = System.currentTimeMillis();
-        System.out.println("Total execution time for binarySearch(): " + (endTime_xd2 - startTime_xd2)); 
-        // output: 1ms || 59417ns
+        System.out.print("\n");
+
+        System.out.println("Running time of search(): \nSearching for a non-existing number in the array\n");
+        timeComplexity(SIZE, () -> oArr1.search(SIZE));
+        timeComplexity(SIZE * 10, () -> oArr2.search(SIZE * 10));
+        timeComplexity(SIZE * 100, () -> oArr3.search(SIZE * 100));
+
+        System.out.print("\n");
 
         //// Problem 3.e ////
 
-        // Inserting randomly chosen numbers
-        long startTime_xe = System.currentTimeMillis();
-        arr1.add(56);
-        arr2.add(965);
-        arr3.add(3420);
-        long endTime_xe = System.currentTimeMillis();
-        System.out.println("Total execution time for add(): " + (endTime_xe - startTime_xe));
-        // output: 0ms || 17125ns
-
-
+        System.out.println("Running time of add(): \n");
+        timeComplexity(SIZE, () -> oArr1.add((int) (Math.random() * SIZE)));
+        timeComplexity(SIZE * 10, () -> oArr2.add((int) (Math.random() * (SIZE * 10))));
+        timeComplexity(SIZE * 100, () -> oArr3.add((int) (Math.random() * (SIZE * 100))));
     }
 }
-
-// Sample Output (each test is slightly different of course):
-/*
-Problem 2
-
-
-90
-778
-1600
-Total execution time for remove(): 0
--1
--1
-897
-Total execution time for search(): 0
--1
--1
--1
-Total execution time for search(): 1
-Total execution time for add(): 0
-
-
-Problem 3
-
-
-false
-true
-false
-Total execution time for removeKey(): 0
--1
-655
--1
-Total execution time for binarySearch(): 1
--1
--1
--1
-Total execution time for binarySearch(): 0
-Total execution time for add(): 0
-*/
