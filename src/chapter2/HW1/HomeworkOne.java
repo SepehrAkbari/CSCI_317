@@ -131,7 +131,7 @@ public class HomeworkOne {
 
         //// Problem 3.c ////
 
-        System.out.println("Running time of remove(): \n");
+        System.out.println("Running time of removeKey(): \n");
         conditionalTimeComplexity(SIZE, 
             () -> oArr1.removeKey((int) (Math.random() * SIZE)),  
             () -> oArr1.removeKey((int) (Math.random() * SIZE)) 
@@ -171,3 +171,113 @@ public class HomeworkOne {
         timeComplexity(SIZE * 100, () -> oArr3.add((int) (Math.random() * (SIZE * 100))));
     }
 }
+
+/* OUTPUT (different every time):
+
+-- Unordered Array --
+
+
+Running time of remove(): 
+
+Time taken (100): 0ms
+Time taken (100): 3541ns
+
+Time taken (1000): 0ms
+Time taken (1000): 2541ns
+
+Time taken (10000): 0ms
+Time taken (10000): 2042ns
+
+
+Running time of search(): 
+Searching for a random number in the array
+
+Time taken (100): 0ms
+Time taken (100): 5041ns
+
+Time taken (1000): 0ms
+Time taken (1000): 3666ns
+
+Time taken (10000): 0ms
+Time taken (10000): 8083ns
+
+
+Running time of search(): 
+Searching for a non-existing number in the array
+
+Time taken (100): 0ms
+Time taken (100): 2917ns
+
+Time taken (1000): 0ms
+Time taken (1000): 14208ns
+
+Time taken (10000): 0ms
+Time taken (10000): 120292ns
+
+
+Running time of add(): 
+
+Time taken (100): 0ms
+Time taken (100): 2875ns
+
+Time taken (1000): 0ms
+Time taken (1000): 1708ns
+
+Time taken (10000): 0ms
+Time taken (10000): 1708ns
+
+
+
+
+-- Ordered Array --
+
+
+Running time of removeKey(): 
+
+Time taken (100): 0ms
+Time taken (100): 1916ns
+
+Time taken (1000): 0ms
+Time taken (1000): 2584ns
+
+Time taken (10000): 0ms
+Time taken (10000): 122750ns
+
+
+Running time of search(): 
+Searching for a random number in the array
+
+Time taken (100): 0ms
+Time taken (100): 3166ns
+
+Time taken (1000): 0ms
+Time taken (1000): 2750ns
+
+Time taken (10000): 0ms
+Time taken (10000): 3333ns
+
+
+Running time of search(): 
+Searching for a non-existing number in the array
+
+Time taken (100): 0ms
+Time taken (100): 2375ns
+
+Time taken (1000): 0ms
+Time taken (1000): 2541ns
+
+Time taken (10000): 0ms
+Time taken (10000): 2584ns
+
+
+Running time of add(): 
+
+Time taken (100): 0ms
+Time taken (100): 2333ns
+
+Time taken (1000): 0ms
+Time taken (1000): 2125ns
+
+Time taken (10000): 0ms
+Time taken (10000): 2958ns
+*/
