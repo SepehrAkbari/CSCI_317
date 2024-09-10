@@ -13,26 +13,14 @@ public class TrySorting {
             array[i] = (int)(Math.random() * RANGE);
         }
 
-        System.out.println("Array:");
-        for (int num:array) {
-            System.out.print(num + ", ");
-        }
-        System.out.println("\n");
-
-        long startTime = System.currentTimeMillis();
-        Sorting.selectionSort(array); // Sorting the array
-        long endTime = System.currentTimeMillis();
-
-        System.out.println("Sorted Array:");
-        for (int num:array) {
-            System.out.print(num + ", ");
+        int[] arrayTwo = new int[5];
+        for (int i = 0; i < 5; i++) {
+            arrayTwo[i] = i + 1;
         }
 
-        System.out.println("\n");
-
-        System.out.println("\nSorted? " + Sorting.isSorted(array));
-        System.out.println("Time taken: " + (endTime - startTime) + "ms");
-
+        System.out.println(java.util.Arrays.toString(arrayTwo));
+        Sorting.reverse(arrayTwo);
+        System.out.println(java.util.Arrays.toString(arrayTwo));
     }
 
     public static void initialize(int[] array) {
