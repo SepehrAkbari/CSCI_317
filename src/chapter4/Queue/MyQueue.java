@@ -11,10 +11,9 @@ public class MyQueue {
         count = 0;
     }
 
-    public void enqueue(char value) throws Exception{
+    public void enqueue(char value) {
         if (isFull()) {
-            Exception e = new Exception("The Queue is full");
-            throw e;
+            System.out.println("Queue is full");
         } else {
             if (rear < data.length - 1) {
                 data[++rear] = value;
@@ -25,10 +24,10 @@ public class MyQueue {
         }
     }
 
-    public char dequeue() throws Exception {
+    public char dequeue() {
         if (isEmpty()) {
-            Exception e = new Exception("The Queue is empty");
-            throw e;
+            System.out.println("Queue is empty");
+            return (char) 0;
         } else {
             count--;
             char item = data[front++];

@@ -11,20 +11,12 @@ public class UseQueue {
                 break;
             }
             System.out.println("Queuing " + text.charAt(i));
-            try {
-                q.enqueue(text.charAt(i));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            q.enqueue(text.charAt(i));
         }
 
-        try {
-            System.out.println("Dequeuing " + q.dequeue());
-            System.out.println("Dequeuing " + q.dequeue());
-            System.out.println("Dequeuing " + q.dequeue());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println("Dequeuing " + q.dequeue());
+        System.out.println("Dequeuing " + q.dequeue());
+        System.out.println("Dequeuing " + q.dequeue());
 
         String text2 = "ABRACADBRA";
         for (int j = 0; j < text2.length(); j++) {
@@ -33,17 +25,9 @@ public class UseQueue {
                 break;
             }
             System.out.println("Queuing " + text.charAt(j));
-            try {
-                q.enqueue(text.charAt(j));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            q.enqueue(text.charAt(j));
         }
 
-        try {
-            q.dequeue();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        q.dequeue();
     }
 }
