@@ -1,5 +1,4 @@
 package chapter2.OrderedArray;
-import chapter1.Array.MyArray;
 
 public class MyOrderedArray extends chapter1.Array.MyArray {
     public MyOrderedArray(int size) {

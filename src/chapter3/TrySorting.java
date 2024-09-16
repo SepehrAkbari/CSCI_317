@@ -1,7 +1,5 @@
 package chapter3;
 
-import chapter3.Sorting;
-
 public class TrySorting {
     public static void main(String[] args) {
         final int SIZE = 100;
