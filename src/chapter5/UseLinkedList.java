@@ -19,5 +19,11 @@ public class UseLinkedList {
 
         System.out.println("a is " + a);
         System.out.println("b is " + b);
+
+        a.removeTail();
+        b.removeTail();
+
+        System.out.println("a is " + a);
+        System.out.println("b is " + b);
     }
 }

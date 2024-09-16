@@ -39,8 +39,8 @@ public class MyLinkedList {
         if (index > count) {
             System.out.println("Index out of bounds");
             return false;
-        } else
-        if (head == null) {
+        }
+        if (head == null || index == 0) {
             insertHead(item);
         } else {
             int currentNum = 0;
@@ -50,11 +50,54 @@ public class MyLinkedList {
                 currentNum++;
             }
             MyLink temp = new MyLink(item);
-            temp.setNext(current.getNext());
-            current.setNext(temp);
-            count++;
-        }
+            temp.setNext(head);
+            head = temp;
+        }   
+        count++;
         return true;
+    }
+
+    public int removeTail() {
+        if (head == null) {
+            return Integer.MIN_VALUE;
+        } else if (head.getNext() == null) {
+            int temp = head.getData();
+            head = null;
+            count--;
+            return temp;
+        } else {
+            MyLink current = head;
+            while (current.getNext().getNext() != null) {
+                current = current.getNext();
+            }
+            int temp = current.getNext().getData();
+            current.setNext(null);
+            count--;
+            return temp;
+        }
+    }
+
+    // remove head
+
+    // remove at index
+
+    public boolean search(int key) {
+       if (count == 0) {
+        return false;
+       } else {
+        MyLink current = head;
+        while (current != null) {
+            if (current.getData() == key) {
+                return true;
+            }
+            current = current.getNext();
+        }
+        return false;
+       }
+    }
+
+    public int getCount(){
+        return count;
     }
 
     public String toString() {
