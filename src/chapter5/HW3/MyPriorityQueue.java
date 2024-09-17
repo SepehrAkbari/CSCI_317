@@ -37,7 +37,12 @@ public class MyPriorityQueue {
     }
 
     public void remove() {
-        System.out.println(list.removeTail() + " removed");
+        if (list.head != null) {
+            int x = list.removeHead();
+            System.out.println(x + " removed");
+        } else {
+            System.out.println("Priority Queue is empty");
+        }
     }
 
     public String toString() {
@@ -94,35 +99,12 @@ class MyLinkedList {
         count++;
     }
 
-    public void insertTail(int item) {
-        if (head == null) {
-            insertHead(item);
-        } else {
-            MyLink current = head;
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            MyLink temp = new MyLink(item);
-            current.setNext(temp);
-            count++;
-        }
-    } 
-
-    public int removeTail() {
+    public int removeHead() {
         if (head == null) {
             return Integer.MIN_VALUE;
-        } else if (head.getNext() == null) {
-            int temp = head.getData();
-            head = null;
-            count--;
-            return temp;
         } else {
-            MyLink current = head;
-            while (current.getNext().getNext() != null) {
-                current = current.getNext();
-            }
-            int temp = current.getNext().getData();
-            current.setNext(null);
+            int temp = head.getData();
+            head = head.getNext();
             count--;
             return temp;
         }
