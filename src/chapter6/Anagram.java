@@ -8,7 +8,6 @@ public class Anagram {
             System.out.println(rest + word);
         } else {
             String ith = "", remaining = "";
-            String output = "";
             for (int i = 0; i < word.length(); i++) {
                 ith = word.charAt(i) + "";
                 remaining = word.substring(0, i) + word.substring(i + 1, word.length());
