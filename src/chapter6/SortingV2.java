@@ -93,10 +93,10 @@ public class SortingV2 {
             mergeSort(left);
             mergeSort(right);
 
-            int[] result = merge(left, right);
+            int[] merged = merge(left, right);
 
             for (int i = 0; i < array.length; i++) {
-                array[i] = result[i];
+                array[i] = merged[i];
             }
         }
     }
