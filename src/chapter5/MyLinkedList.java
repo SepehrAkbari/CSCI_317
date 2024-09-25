@@ -78,8 +78,37 @@ public class MyLinkedList {
     }
 
     // remove head
+    public int removeHead() {
+        if (head == null) {
+            return Integer.MIN_VALUE;
+        } else {
+            int temp = head.getData();
+            head = head.getNext();
+            count--;
+            return temp;
+        }
+    }
 
     // remove at index
+    public int removeAtIndex(int index) {
+        if (index >= count || index < 0) {
+            return Integer.MIN_VALUE;
+        }
+        if (head == null || index == 0) {
+            return removeHead();
+        } else {
+            int currentNum = 0;
+            MyLink current = head;
+            while (currentNum < index - 1) {
+                current = current.getNext();
+                currentNum++;
+            }
+            int temp = current.getNext().getData();
+            current.setNext(current.getNext().getNext());
+            count--;
+            return temp;
+        }
+    }
 
     public boolean search(int key) {
        if (count == 0) {
@@ -94,6 +123,23 @@ public class MyLinkedList {
         }
         return false;
        }
+    }
+
+    public int searchIndex(int key) {
+        if (count == 0) {
+            return -1;
+        } else {
+            MyLink current = head;
+            int count = 0;
+            while (current != null) {
+                if (current.getData() == key) {
+                    return count;
+                }
+                current = current.getNext();
+                count++;
+            }
+            return -1;
+        }
     }
 
     public int getCount(){
