@@ -88,8 +88,10 @@ public class SortingV3 {
 		for(int i = 0; i<intervals.length; i++) {
 			int interval = intervals[i];
 			//System.out.println(interval);
-			if(interval>=array.length)
+			if(interval>=array.length) {
 				continue;
+
+			}
 			for(int shift = 0; shift<interval; shift++) {
 			
 				// code for insertion sort
@@ -182,34 +184,34 @@ public class SortingV3 {
 		MyLinkedQueue[] buckets = new MyLinkedQueue[10];
 		
 		// Initialize the empty buckets
-		for(int i = 0; i < buckets.length; i++)
+		for(int i=0; i<buckets.length; i++)
 			buckets[i] = new MyLinkedQueue();
 		int powerOfTen = 1;
 		int largestSize = 1;
 		int max = array[0];
 		while(powerOfTen <= largestSize) {
-			for(int i = 0; i<array.length; i++) {
+			for(int i=0; i<array.length; i++) {
 				int temp = array[i] % (int)Math.pow(10, powerOfTen);
-				int digit = temp / (int)Math.pow(10, powerOfTen - 1);
+				int digit = temp / (int)Math.pow(10, powerOfTen-1);
 				buckets[digit].insert(array[i]);
 				//code to find out the max number of digits
 				//runs only the first time
-				if(powerOfTen == 1) {
-					if(array[i] > max)
+				if(powerOfTen==1) {
+					if(array[i]>max)
 						max = array[i];
 					String max_str = Integer.toString(max);
 					largestSize = max_str.length();
 				}
 			}
 			int count = 0;
-			for(int i = 0; i < buckets.length; i++) {
-				while(buckets[i].getCount() > 0)
+			for(int i=0; i<buckets.length; i++) {
+				while(buckets[i].getCount()>0)
 					array[count++] = buckets[i].remove();
 			}
 			powerOfTen++;
-			for (int num:array)
-				System.out.print(num + " ");
-			System.out.println();
+//			for (int num:array)
+//				System.out.print(num + " ");
+//			System.out.println();
 		}
 		
 	}
