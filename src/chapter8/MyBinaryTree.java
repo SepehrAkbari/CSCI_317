@@ -5,6 +5,12 @@ public abstract class MyBinaryTree {
     protected MyBinaryTree left;
     protected MyBinaryTree right;
 
+    public MyBinaryTree(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+
     public int getData() {
         return data;
     } 
