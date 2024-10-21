@@ -35,7 +35,7 @@ public abstract class MyBinaryTree {
         right = node;
     }
 
-    public abstract void insert(int data);
+    public abstract void insert(int key);
     public abstract void remove();
     public abstract boolean search(int key);
 }
