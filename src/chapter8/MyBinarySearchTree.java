@@ -28,6 +28,20 @@ public class MyBinarySearchTree extends MyBinaryTree {
 
     @Override
     public boolean search(int key) {
-        return false;
+        if (key < data) {
+            if (left == null) {
+                return false;
+            } else {
+                return left.search(key);
+            }
+        } else if (key > data){
+            if (right == null) {
+                return false;
+            } else {
+                return right.search(key);
+            }
+        } else {
+            return true;
+        }
     }
 }
